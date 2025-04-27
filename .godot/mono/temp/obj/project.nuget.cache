@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "U+zI6skBwJU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\blupa\\Documents\\cheess-demon-hand\\Cheess Demon Hand.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\blupa\\.nuget\\packages\\godot.sourcegenerators\\4.4.1\\godot.sourcegenerators.4.4.1.nupkg.sha512",
+    "C:\\Users\\blupa\\.nuget\\packages\\godotsharp\\4.4.1\\godotsharp.4.4.1.nupkg.sha512",
+    "C:\\Users\\blupa\\.nuget\\packages\\godotsharpeditor\\4.4.1\\godotsharpeditor.4.4.1.nupkg.sha512"
+  ],
+  "logs": []
+}

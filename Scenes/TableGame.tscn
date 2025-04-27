@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://8tb4q7vsqnvk"]
+[gd_scene load_steps=2 format=3 uid="uid://8tb4q7vsqnvk"]
+
+[ext_resource type="Script" uid="uid://day275e2akyn0" path="res://Scripts/BoardManager.cs" id="1_71dbi"]
 
 [node name="TableGame" type="Node2D"]
+script = ExtResource("1_71dbi")

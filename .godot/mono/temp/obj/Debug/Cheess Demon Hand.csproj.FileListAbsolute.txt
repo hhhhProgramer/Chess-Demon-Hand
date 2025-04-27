@@ -1,0 +1,17 @@
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\Cheess Demon Hand.deps.json
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\Cheess Demon Hand.runtimeconfig.json
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\Cheess Demon Hand.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\Cheess Demon Hand.pdb
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.csproj.AssemblyReference.cache
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.AssemblyInfoInputs.cache
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.AssemblyInfo.cs
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.csproj.CoreCompileInputs.cache
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess D.D8E845F0.Up2Date
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\refint\Cheess Demon Hand.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.pdb
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.genruntimeconfig.cache
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\ref\Cheess Demon Hand.dll
