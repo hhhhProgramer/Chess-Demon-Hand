@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Cheess Demon Hand"
-run/main_scene="uid://8tb4q7vsqnvk"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="uid://bngvkcytuc0ta"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]

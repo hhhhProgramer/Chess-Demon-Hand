@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://8tb4q7vsqnvk"]
+[gd_scene load_steps=5 format=3 uid="uid://bngvkcytuc0ta"]
 
 [ext_resource type="Script" uid="uid://day275e2akyn0" path="res://Scripts/BoardManager.cs" id="1_71dbi"]
+[ext_resource type="Script" uid="uid://d4c3enu7tc531" path="res://Scripts/TurnManager.cs" id="2_8j9k0"]
+[ext_resource type="PackedScene" uid="uid://c665f0ot7ycfl" path="res://Scenes/Player.tscn" id="3_4l5m6"]
+[ext_resource type="PackedScene" uid="uid://nitpbitg2m3v" path="res://Scenes/GameGui.tscn" id="4_g4wdf"]
 
 [node name="TableGame" type="Node2D"]
+
+[node name="BoardManager" type="Node2D" parent="."]
 script = ExtResource("1_71dbi")
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("2_8j9k0")
+PlayerScene = ExtResource("3_4l5m6")
+
+[node name="GameGui" parent="." instance=ExtResource("4_g4wdf")]
+position = Vector2(1065, 50)

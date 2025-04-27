@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cheess Demon Hand")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ab5c82c866ed11616c421cb1e40f269315b0aa31")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07921b24225a09c993a79b6f43504b84bfed8da1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cheess Demon Hand")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cheess Demon Hand")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
