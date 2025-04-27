@@ -45,7 +45,7 @@ namespace ChessDemonHand
 
 		public override void _Input(InputEvent @event)
 		{
-			
+
 			if (@event is InputEventMouseButton eventMouseButton)
 			{
 				if (IsMyTurn)
@@ -64,12 +64,12 @@ namespace ChessDemonHand
 
 		public bool TryMove(Vector2I newPosition)
 		{
-			if (!IsMyTurn) 
+			if (!IsMyTurn)
 			{
 				GD.Print($"Player {PlayerName} cannot move, it's not their turn");
 				return false;
 			}
-			if (!IsValidMove(newPosition)) 
+			if (!IsValidMove(newPosition))
 			{
 				GD.Print($"Player {PlayerName} cannot move to {newPosition}, invalid move");
 				return false;
@@ -78,12 +78,16 @@ namespace ChessDemonHand
 			CurrentPosition = newPosition;
 			UpdatePosition();
 			GD.Print($"Player {PlayerName} moved to {CurrentPosition}");
+
+			// Llama a EndTurn en el TurnManager
+			var turnManager = GetNode<TurnManager>("/root/TableGame/TurnManager");
+			turnManager.EndTurn();
 			return true;
 		}
 
 		public bool TryChangeMovementType(MovementType newType)
 		{
-			if (!IsMyTurn) 
+			if (!IsMyTurn)
 			{
 				GD.Print($"Player {PlayerName} cannot change movement type, it's not their turn");
 				return false;

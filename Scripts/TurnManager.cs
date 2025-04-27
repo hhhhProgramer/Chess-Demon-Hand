@@ -15,6 +15,8 @@ namespace ChessDemonHand
 		private List<Player> _players = new List<Player>();
 		private int _currentPlayerIndex = 0;
 		
+		private Timer _turnDelayTimer;
+		
 		[Signal]
 		public delegate void TurnChangedEventHandler(Player currentPlayer);
 		
@@ -26,6 +28,11 @@ namespace ChessDemonHand
 				return;
 			}
 			
+			_turnDelayTimer = new Timer();
+			_turnDelayTimer.WaitTime = 1.0f; // 5 segundos
+			_turnDelayTimer.OneShot = true; // Solo se ejecuta una vez
+			_turnDelayTimer.Connect("timeout", new Callable(this, nameof(OnTurnDelayTimeout)));
+			AddChild(_turnDelayTimer); // Agregar el Timer al nodo
 			CallDeferred(nameof(CreatePlayers));
 		}
 		
@@ -79,19 +86,17 @@ namespace ChessDemonHand
 		
 		public void EndTurn()
 		{
-			// Cambiar al siguiente jugador
-			_currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
-			UpdateCurrentPlayer();
-		}
-		
-		private void UpdateCurrentPlayer()
-		{
+			// Iniciar el Timer
 			// Desactivar el turno de todos los jugadores
 			foreach (var player in _players)
 			{
 				player.SetTurn(false);
 			}
-			
+			_turnDelayTimer.Start();
+		}
+		
+		private void UpdateCurrentPlayer()
+		{
 			// Activar el turno del jugador actual
 			var currentPlayer = _players[_currentPlayerIndex];
 			currentPlayer.SetTurn(true);
@@ -119,6 +124,12 @@ namespace ChessDemonHand
 		{
 			_players.Add(player);
 			player.AddToGroup("players");
+		}
+		
+		private void OnTurnDelayTimeout()
+		{
+			_currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
+			UpdateCurrentPlayer();
 		}
 	}
 } 
