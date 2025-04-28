@@ -12,7 +12,7 @@ namespace ChessDemonHand
 		[Export]
 		public Color PlayerColor { get; set; }
 
-		public Vector2I CurrentPosition { get; private set; }
+		public Vector2I CurrentPosition { get;  set; }
 		public MovementType CurrentMovementType { get; private set; }
 
 		[Export]
@@ -26,10 +26,6 @@ namespace ChessDemonHand
 			_boardManager = GetNode<BoardManager>("/root/TableGame/BoardManager");
 			_playerSprite = GetNode<Sprite2D>("Sprite2D");
 			_playerSprite.Modulate = PlayerColor;
-
-			// Posición inicial en (0,0)
-			CurrentPosition = new Vector2I(0, 0);
-			UpdatePosition();
 
 			// Tipo de movimiento inicial: Torre
 			CurrentMovementType = MovementType.Rook;
@@ -130,7 +126,7 @@ namespace ChessDemonHand
 			}
 		}
 
-		private void UpdatePosition()
+		public void UpdatePosition()
 		{
 			Position = _boardManager.GetCellPosition(CurrentPosition.X, CurrentPosition.Y);
 			GD.Print($"Player {PlayerName} position updated to {CurrentPosition}");

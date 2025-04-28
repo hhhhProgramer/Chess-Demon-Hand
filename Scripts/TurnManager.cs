@@ -12,7 +12,7 @@ namespace ChessDemonHand
 		[Export]
 		private PackedScene PlayerScene;
 		
-		private List<Player> _players = new List<Player>();
+		private List<Player> _players = new();
 		private int _currentPlayerIndex = 0;
 		
 		private Timer _turnDelayTimer;
@@ -38,17 +38,36 @@ namespace ChessDemonHand
 		
 		private void CreatePlayers()
 		{
-			// Colores predefinidos para los jugadores
-			Color[] playerColors = new Color[]
-			{
-				new Color(1, 0, 0, 1), // Rojo
-				new Color(0, 0, 1, 1), // Azul
-				new Color(0, 1, 0, 1), // Verde
-				new Color(1, 1, 0, 1), // Amarillo
-				new Color(1, 0, 1, 1), // Magenta
-				new Color(0, 1, 1, 1)  // Cyan
-			};
+			// Obtener el BoardManager
+			var boardManager = GetNode<BoardManager>("/root/TableGame/BoardManager");
 			
+			// Obtener el tamaño de las celdas
+			float cellSize = boardManager.GetCellSize();
+			
+			// Obtener el ancho y alto del tablero
+			int boardWidth = boardManager.BoardWidth; // Asegúrate de que sea público
+			int boardHeight = boardManager.BoardHeight; // Asegúrate de que sea público
+
+			// Definir posiciones para hasta 4 jugadores
+			Vector2I[] playerPositions = new Vector2I[]
+			{
+				new((int)((boardWidth - 1) * cellSize / cellSize), 0), // Jugador 1: Superior derecha
+				new(0, (int)((boardHeight - 1) * cellSize / cellSize)), // Jugador 2: Inferior izquierda
+				new(0, 0), // Jugador 3: Superior izquierda
+				new((int)((boardWidth - 1) * cellSize / cellSize), (int)((boardHeight - 1) * cellSize / cellSize)) // Jugador 4: Inferior derecha
+			};
+
+			// Colores predefinidos para los jugadores
+			Color[] playerColors =
+			[
+				new(1, 0, 0, 1), // Rojo
+				new(0, 0, 1, 1), // Azul
+				new(0, 1, 0, 1), // Verde
+				new(1, 1, 0, 1), // Amarillo
+				new(1, 0, 1, 1), // Magenta
+				new(0, 1, 1, 1)  // Cyan
+			];
+
 			for (int i = 0; i < NumberOfPlayers; i++)
 			{
 				// Crear nuevo jugador
@@ -61,12 +80,12 @@ namespace ChessDemonHand
 				
 				player.PlayerName = $"Player {i + 1}";
 				player.PlayerColor = playerColors[i % playerColors.Length];
+				player.CurrentPosition = playerPositions[i];
 				
 				// Agregar a la escena y al manager
 				GetParent().CallDeferred("add_child", player);
-				AddPlayer(player);
-				
-				GD.Print($"Created player {player.PlayerName} with color {player.PlayerColor}");
+				AddPlayer(player, playerPositions[i]);
+				GD.Print($"Created player {player.PlayerName} with color {player.PlayerColor} at position {player.Position}");
 			}
 			
 			CallDeferred(nameof(StartGame));
@@ -78,6 +97,11 @@ namespace ChessDemonHand
 			{
 				GD.PrintErr("No players were created!");
 				return;
+			}
+			
+			foreach (var player in _players)
+			{
+				player.UpdatePosition();
 			}
 			
 			// Inicializar el primer turno
@@ -120,10 +144,11 @@ namespace ChessDemonHand
 			return _players;
 		}
 		
-		public void AddPlayer(Player player)
+		public void AddPlayer(Player player, Vector2I position)
 		{
 			_players.Add(player);
 			player.AddToGroup("players");
+
 		}
 		
 		private void OnTurnDelayTimeout()

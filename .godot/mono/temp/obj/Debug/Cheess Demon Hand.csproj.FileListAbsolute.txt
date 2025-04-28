@@ -15,3 +15,4 @@ C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\refint\Che
 C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.pdb
 C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.genruntimeconfig.cache
 C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\ref\Cheess Demon Hand.dll
+C:\Users\blupa\Documents\cheess-demon-hand\.godot\mono\temp\obj\Debug\Cheess Demon Hand.sourcelink.json

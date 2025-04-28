@@ -7,10 +7,10 @@ namespace ChessDemonHand
 	public partial class BoardManager : Node2D
 	{
 		[Export]
-		private int BoardWidth = 5;
+		public int BoardWidth = 5;
 		
 		[Export]
-		private int BoardHeight = 5;
+		public int BoardHeight = 5;
 		
 		private Vector2[,] _boardPositions;
 		private Node2D _boardContainer;
