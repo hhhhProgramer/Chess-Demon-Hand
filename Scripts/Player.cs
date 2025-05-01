@@ -12,7 +12,7 @@ namespace ChessDemonHand
 		[Export]
 		public Color PlayerColor { get; set; }
 
-		public Vector2I CurrentPosition { get;  set; }
+		public Vector2I CurrentPosition { get; set; }
 		public MovementType CurrentMovementType { get; private set; }
 
 		[Export]
@@ -20,12 +20,38 @@ namespace ChessDemonHand
 
 		private BoardManager _boardManager;
 		private Sprite2D _playerSprite;
+		private TurnManager _turnManager;
+		private Popup _movementTypePopup;
+		private VBoxContainer _optionsContainer;
 
 		public override void _Ready()
 		{
 			_boardManager = GetNode<BoardManager>("/root/TableGame/BoardManager");
 			_playerSprite = GetNode<Sprite2D>("Sprite2D");
 			_playerSprite.Modulate = PlayerColor;
+			_turnManager = GetNode<TurnManager>("/root/TableGame/TurnManager");
+			// Create the Popup
+			_movementTypePopup = new Popup();
+			_optionsContainer = new VBoxContainer();
+
+			// Add the VBoxContainer to the Popup
+			_movementTypePopup.AddChild(_optionsContainer);
+
+			// Add the Popup to the current node (Player)
+			AddChild(_movementTypePopup);
+
+			// Conectar los botones de movimiento
+			foreach (MovementType type in Enum.GetValues(typeof(MovementType)))
+			{
+				if (type != CurrentMovementType)
+				{
+					Button button = new Button { Text = type.ToString() };
+
+					var movementTypeCopy = type; // Evita problemas de captura en bucles
+					button.Pressed += () => OnMovementTypeSelected(movementTypeCopy);
+					_optionsContainer.AddChild(button);
+				}
+			}
 
 			// Tipo de movimiento inicial: Torre
 			CurrentMovementType = MovementType.Rook;
@@ -41,10 +67,20 @@ namespace ChessDemonHand
 
 		public override void _Input(InputEvent @event)
 		{
-
 			if (@event is InputEventMouseButton eventMouseButton)
 			{
-				if (IsMyTurn)
+				if (eventMouseButton.ButtonIndex == MouseButton.Right && IsMyTurn)
+				{
+					// Check if the click is on the player
+					GD.Print($"Mouse clicked for options player {PlayerName}");
+					ShowMovementOptions(); // Show the movement options popup
+
+					Rect2 playerRect = new Rect2(GlobalPosition - (_playerSprite.Texture.GetSize() / 2), _playerSprite.Texture.GetSize());
+					if (playerRect.HasPoint(eventMouseButton.GlobalPosition))
+					{
+					}
+				}
+				else if (IsMyTurn)
 				{
 					GD.Print($"Mouse clicked for player {PlayerName}");
 					Vector2I newPosition = new((int)(eventMouseButton.Position.X / _boardManager.GetCellSize()), (int)(eventMouseButton.Position.Y / _boardManager.GetCellSize()));
@@ -76,8 +112,7 @@ namespace ChessDemonHand
 			GD.Print($"Player {PlayerName} moved to {CurrentPosition}");
 
 			// Llama a EndTurn en el TurnManager
-			var turnManager = GetNode<TurnManager>("/root/TableGame/TurnManager");
-			turnManager.EndTurn();
+			_turnManager.EndTurn();
 			return true;
 		}
 
@@ -114,9 +149,9 @@ namespace ChessDemonHand
 
 				case MovementType.Rook:
 					// Movimiento horizontal o vertical, máximo 2 casillas
-					if (deltaX == 0 && deltaY <= 2) // Movimiento vertical
+					if (deltaX == 0 && deltaY <= 2 && deltaY > 0) // Movimiento vertical
 						return true;
-					if (deltaY == 0 && deltaX <= 2) // Movimiento horizontal
+					if (deltaY == 0 && deltaX <= 2 && deltaX > 0) // Movimiento horizontal
 						return true;
 					return false;
 
@@ -130,6 +165,21 @@ namespace ChessDemonHand
 		{
 			Position = _boardManager.GetCellPosition(CurrentPosition.X, CurrentPosition.Y);
 			GD.Print($"Player {PlayerName} position updated to {CurrentPosition}");
+		}
+
+		// Método para mostrar el Popup
+		private void ShowMovementOptions()
+		{
+			GD.Print($"show options {PlayerName}");
+			_movementTypePopup.Popup();
+		}
+
+		// Método para manejar la selección del tipo de movimiento
+		private void OnMovementTypeSelected(MovementType newType)
+		{
+			TryChangeMovementType(newType);
+			_movementTypePopup.Hide(); // Oculta el Popup después de seleccionar
+			_turnManager.EndTurn();
 		}
 	}
 }

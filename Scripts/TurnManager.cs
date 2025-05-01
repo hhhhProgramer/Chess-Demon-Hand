@@ -112,6 +112,11 @@ namespace ChessDemonHand
 		{
 			// Iniciar el Timer
 			// Desactivar el turno de todos los jugadores
+
+			if(CheckForCombat()){
+				return;
+			}
+
 			foreach (var player in _players)
 			{
 				player.SetTurn(false);
@@ -156,5 +161,45 @@ namespace ChessDemonHand
 			_currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
 			UpdateCurrentPlayer();
 		}
+		
+		private bool CheckForCombat()
+		{
+			// Get all players in the game
+			var players = GetTree().GetNodesInGroup("players"); // Assuming players are added to a group called "players"
+			var currentPlayer = GetCurrentPlayer();
+
+			foreach (Player otherPlayer in players)
+			{
+				if (otherPlayer != currentPlayer && otherPlayer.CurrentPosition == currentPlayer.CurrentPosition && !otherPlayer.IsMyTurn)
+				{
+					GD.Print($"Combat initiated between {currentPlayer.PlayerName} and {otherPlayer.PlayerName}");
+					StartCombat(otherPlayer); // Call StartCombat in TurnManager
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public void StartCombat(Player otherPlayer)
+		{
+			var currentPlayer = GetCurrentPlayer();
+			var combatMenu = GetNode<CombatMenu>("/root/TableGame/CombatMenu");
+			combatMenu.ShowMenu(currentPlayer, otherPlayer);
+		}
+		
+		public void RemovePlayer(Player player)
+		{
+			_players.Remove(player);
+			player.QueueFree(); // Eliminar el nodo del juego
+		}
+		
+		public void RestartGame()
+		{
+			// Lógica para reiniciar el juego
+			GD.Print("Restarting the game...");
+			// Aquí puedes reiniciar el estado del juego, volver a crear jugadores, etc.
+		}
 	}
+
 } 

@@ -1,8 +1,9 @@
 res://Scenes/TableGame.tscn
-res://Scripts/BoardManager.cs
-res://Scripts/NewScript.cs
-res://Scripts/Player.cs
-res://Scripts/TurnManager.cs
 res://Scenes/Player.tscn
-res://Scripts/GameGUI.cs
 res://Scenes/GameGui.tscn
+res://Scripts/BoardManager.cs
+res://Scripts/TurnManager.cs
+res://Scripts/GameGUI.cs
+res://Scripts/NewScript.cs
+res://Scripts/CombatMenu.cs
+res://Scripts/Player.cs
